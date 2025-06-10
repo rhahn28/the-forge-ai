@@ -1,0 +1,13 @@
+# Python cache files
+__pycache__/
+*.pyc
+
+# Environment folder (if it's inside the project)
+forgeenv/
+
+# Secret keys
+.env
+
+# IDE settings
+.vscode/
+.idea/
