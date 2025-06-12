@@ -1,46 +1,72 @@
 # tools/mcp_server_shell.py
+
 import subprocess
 import shlex
+import os
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import uvicorn
 
 app = FastAPI()
 
-# --- THE FIX IS HERE ---
-# This list explicitly allows both 'pytest' and 'pip' as valid commands.
-COMMAND_ALLOW_LIST = ["pytest", "pip"]
+SAFE_PREFIXES = [
+    "pytest",
+    "PYTHONPATH=src",
+    "set PYTHONPATH=src&&"
+]
 
 class ShellPayload(BaseModel):
     command: str
+    venv_path: str = None
+    extra_env: dict = None
 
 @app.post("/run_shell")
 async def run_shell_command(payload: ShellPayload):
     command_to_run = payload.command
+    venv_path = payload.venv_path
+    extra_env = payload.extra_env or {}
+
     print(f"---SHELL SERVER: Received command: '{command_to_run}'---")
+    print(f"---SHELL SERVER: Extra env: {extra_env}---")
 
-    # This robust parsing correctly identifies the main command (e.g., 'pip').
-    try:
-        command_parts = shlex.split(command_to_run)
-        if not command_parts or command_parts[0] not in COMMAND_ALLOW_LIST:
-            # If the command is not allowed, raise a 403 Forbidden error.
-            print(f"---SHELL SERVER: REJECTED forbidden command '{command_parts[0]}'---")
-            raise HTTPException(
-                status_code=403,
-                detail=f"Command '{command_parts[0]}' is not in the allow list."
-            )
-    except Exception as e:
-         raise HTTPException(status_code=400, detail=f"Failed to parse command: {e}")
+    allow = any(command_to_run.startswith(prefix) for prefix in SAFE_PREFIXES)
+    if not allow:
+        print(f"---SHELL SERVER: REJECTED forbidden command '{command_to_run}'---")
+        raise HTTPException(status_code=403, detail=f"Command '{command_to_run}' is not allowed.")
 
-    print(f"---SHELL SERVER: EXECUTING allowed command: {command_to_run}---")
+    env = os.environ.copy()
+    env.update(extra_env)
+
+    # tools/mcp_server_shell.py  (partial inside run_shell_command)
+
     try:
-        result = subprocess.run(
-            command_parts, capture_output=True, text=True, check=False
-        )
+        env = os.environ.copy()
+        env.update(extra_env)
+
+        # Detect correct working directory (adjust this as needed)
+        working_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
+        if venv_path:
+            if os.name == "nt":
+                activate_path = os.path.join(venv_path, "Scripts", "activate.bat")
+                full_command = f'cmd /c "{activate_path} && {command_to_run}"'
+            else:
+                activate_path = os.path.join(venv_path, "bin", "activate")
+                full_command = f'bash -c "source \'{activate_path}\' && {command_to_run}"'
+
+            print(f"---SHELL SERVER: Full venv command: {full_command}---")
+            result = subprocess.run(full_command, capture_output=True, text=True, shell=True, env=env, cwd=working_dir)
+        else:
+            result = subprocess.run(command_to_run, capture_output=True, text=True, shell=True, env=env, cwd=working_dir)
+
         return {
-            "status": "success", "return_code": result.returncode,
-            "stdout": result.stdout, "stderr": result.stderr,
+            "status": "success",
+            "return_code": result.returncode,
+            "stdout": result.stdout,
+            "stderr": result.stderr,
         }
+
+
     except Exception as e:
         print(f"ERROR: Failed to execute command '{command_to_run}': {e}")
         raise HTTPException(status_code=500, detail=str(e))

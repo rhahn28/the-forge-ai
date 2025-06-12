@@ -1,0 +1,11 @@
+{
+  "Create_a_CLI_tool_that_converts_a_Markdown_file_to_HTML_The_tool_7ecb9110": {
+    "path": "generated_envs\\Create_a_CLI_tool_that_converts_a_Markdown_file_to_HTML_The_tool_7ecb9110",
+    "created": "2025-06-12T12:48:37.270499",
+    "libraries": [
+      "markdown2",
+      "pytest"
+    ],
+    "task_raw_name": "Create a CLI tool that converts a Markdown file to HTML. The tool should be in a 'src' directory. It must use the 'markdown2' library. It should take a source file path as a command-line argument and print the resulting HTML to the console. Create a 'tests' directory with a pytest file to test the conversion logic."
+  }
+}
