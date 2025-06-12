@@ -1,118 +1,52 @@
 # agents/planner_agent.py
-import httpx
 import json
-import re
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
-from langchain.schema import StrOutputParser
+from langchain_core.output_parsers import PydanticOutputParser
 from state import ForgeState
+from core.models import Plan, PlanStep
 from core.file_client import FileSystemClient
-
+from typing import List
 
 class PlannerAgent:
-    """
-    This agent uses an LLM to generate a detailed, structured JSON plan.
-    """
     def __init__(self):
         load_dotenv()
-        self.fs_client = FileSystemClient()
-        
-        prompt_template = """
-You are a code generation bot. Your sole purpose is to convert a user's request into a series of commands in a JSON format.
-You MUST ONLY output a valid JSON list of objects, even if the plan only contains one step.
+        self.pydantic_parser = PydanticOutputParser(pydantic_object=Plan)
+        self.prompt = ChatPromptTemplate.from_messages(
+            [
+                ("system", """
+You are a hyper-efficient, non-conversational software planning bot. Your sole purpose is to convert user requests into a JSON object that strictly adheres to the provided schema.
+DO NOT output any text, introductions, or explanations. You MUST only output the JSON.
+The user's request may include feedback from a previous failed attempt. Use this feedback to improve the plan.
+You MUST create a 'src/' directory for main code and a 'tests/' directory for test code.
+For every script file created, you MUST also create a corresponding test file.
+"""),
+                ("human", """
+User Request: "{task}"
+Error Feedback (if any): "{error}"
 
-The user's request is: "{task}"
-The current files in the directory are: "{files}"
-
-Each object in the JSON list MUST have a "command" key and a "path" key.
-If the command is "WRITE_TO_FILE", it MUST also include a "content" key.
-The only valid commands are "CREATE_FILE" and "WRITE_TO_FILE".
-
-This is an example of a valid response for a multi-step plan:
-```json
-[
-    {{
-        "command": "CREATE_FILE",
-        "path": "example.py"
-    }},
-    {{
-        "command": "WRITE_TO_FILE",
-        "path": "example.py",
-        "content": "print('This is an example')"
-    }}
-]
-
-This is an example of a valid response for a single-step plan:
-
-[
-    {{
-        "command": "CREATE_FILE",
-        "path": "single_file.py"
-    }}
-]
-
-
-
-
-NOW, GENERATE THE PLAN FOR THE USER'S REQUEST. Output ONLY the JSON list, inside a ```json code block.
-"""
-
-        # --- Instruction 4 in the recipe ---
-        # Because this line has the same indentation, it is the very next step
-        # in the same recipe. Python now creates an attribute on our object
-        # called 'self.llm_chain'. To do this, it USES the 'prompt_template'
-        # variable it created in the step right above.
-        self.llm_chain = (
-            ChatPromptTemplate.from_template(prompt_template)
-            | ChatOpenAI(model="gpt-4o", response_format={"type": "json_object"})
-            | StrOutputParser()
+SCHEMA:
+{format_instructions}
+"""),
+            ]
         )
-    
-    # Now the recipe for __init__ is finished.
-    # This 'run' method is also part of the PlannerAgent class, but it's a different recipe.
-
-
-
+        self.llm_chain = self.prompt | ChatOpenAI(model="gpt-4o") | self.pydantic_parser
 
     async def run(self, state: ForgeState) -> dict:
-        """
-        This is the main entry point for the agent's logic.
-        """
-        print("---PLANNER AGENT (JSON): Generating a plan...---")
-        plan_str = ""
+        print("---PLANNER AGENT (Pydantic): Generating a plan...---")
         try:
-            current_files = await self.fs_client.list_files()
-            plan_str = await self.llm_chain.ainvoke({
+            plan_obj = await self.llm_chain.ainvoke({
                 "task": state['task'],
-                "files": ", ".join(current_files) if current_files else "No files yet."
+                "error": state.get("error", "None"),
+                "format_instructions": self.pydantic_parser.get_format_instructions(),
             })
-            
-            parsed_json = json.loads(plan_str)
-            
-            # --- NEW ROBUST LOGIC ---
-            # If the AI returns a single dictionary instead of a list of dictionaries,
-            # we will automatically wrap it in a list to handle the case.
-            if isinstance(parsed_json, dict):
-                # Check if it's a plan list nested under a key
-                if len(parsed_json) == 1 and isinstance(next(iter(parsed_json.values())), list):
-                    plan_list = next(iter(parsed_json.values()))
-                else: # It's a single command object
-                    print("---INFO: AI returned a single command object. Wrapping it in a list.---")
-                    plan_list = [parsed_json]
-            elif isinstance(parsed_json, list):
-                plan_list = parsed_json
-            else:
-                raise ValueError("Parsed JSON is not a recognized format (list or dict).")
-            # --- END OF NEW LOGIC ---
-
-            print("---PLANNER AGENT: Plan Generated.---")
+            plan_list = [step.model_dump() for step in plan_obj.steps]
+            if not plan_list:
+                raise ValueError("Planner returned an empty plan.")
+            print("---PLANNER AGENT: Plan Generated and Validated.---")
             print(plan_list)
-            
-            return {"plan": plan_list, "current_step": 0}
+            return {"plan": plan_list, "current_step": 0, "error": None}
         except Exception as e:
             print(f"---PLANNER AGENT: ERROR - {e}---")
-            print("---RAW LLM OUTPUT THAT CAUSED ERROR:---")
-            print(plan_str)
-            print("---------------------------------------")
-            return {"error": str(e)}
+            return {"error": f"Planner failed with an unrecoverable error: {e}"}

@@ -1,2 +1,0 @@
-PLAN FROM FILE:
-This is the initial task from the user.

@@ -1,76 +1,86 @@
+# main.py
 import asyncio
+import os
+import argparse
+import shutil
 from langgraph.graph import StateGraph, END
 from state import ForgeState
 from agents.planner_agent import PlannerAgent
 from agents.code_generator_agent import CodeGenerationAgent
+from agents.test_engineer_agent import TestEngineerAgent
+from agents.debugger_agent import DebuggerAgent
 
-# 1. Initialize our agents
-planner_agent = PlannerAgent()
-coder_agent = CodeGenerationAgent()
+# HUMAN REVIEW NODE
+def human_review_node(state: ForgeState):
+    print("\n" + "="*40 + "\n--- HUMAN REVIEW REQUIRED ---\n" + "="*40)
+    plan = state.get("plan")
+    if not plan:
+        print("No plan generated."); return {"error": "No plan generated."}
+    print("The AI Planner has generated the following plan:")
+    for i, step in enumerate(plan):
+        print(f"  Step {i+1}: {step}")
+    while True:
+        user_input = input("\nDo you approve this plan? (y/n): ").lower().strip()
+        if user_input == 'y':
+            print("--- Plan approved. Proceeding. ---"); return {"error": None}
+        elif user_input == 'n':
+            print("--- Plan rejected. Ending. ---"); return {"error": "Plan rejected by user."}
+        else: print("Invalid input. Please enter 'y' or 'n'.")
 
-# 2. Define the graph nodes
+# AGENT INITIALIZATION
+planner_agent = PlannerAgent(); coder_agent = CodeGenerationAgent(); tester_agent = TestEngineerAgent(); debugger_agent = DebuggerAgent()
+
+# GRAPH DEFINITION
 workflow = StateGraph(ForgeState)
 workflow.add_node("planner", planner_agent.run)
+workflow.add_node("human_review", human_review_node)
 workflow.add_node("coder", coder_agent.execute_step)
+workflow.add_node("tester", tester_agent.run_tests)
+workflow.add_node("debugger", debugger_agent.analyze_error)
 
-# 3. Define the routing logic function
-def should_continue(state: ForgeState):
-    """
-    This is our "router." It checks the state and decides where to go next.
-    """
-    print("---ROUTER: Checking state...---")
-    # If there was an error in the last step, end the workflow.
+# ROUTER DEFINITIONS
+def coder_router(state: ForgeState):
+    if state.get("error"): return "debugger"
+    if state.get("plan") and state.get("current_step", 0) < len(state.get("plan")): return "coder"
+    else: return "tester"
+
+def test_router(state: ForgeState):
     if state.get("error"):
-        print("---ROUTER: Error detected. Ending workflow.---")
+        return "debugger"
+    else:
         return "end"
 
-    # Get the plan and the current step from the state.
-    plan = state.get("plan", [])
-    current_step = state.get("current_step", 0)
-
-    # If the current step is beyond the length of the plan, we're done.
-    if current_step >= len(plan):
-        print("---ROUTER: Plan complete. Ending workflow.---")
+def review_router(state: ForgeState):
+    if state.get("error"):
         return "end"
     else:
-        # Otherwise, continue to the coder.
-        print(f"---ROUTER: Plan has {len(plan) - current_step} steps remaining. Continuing.---")
-        return "continue_coding"
+        return "coder"
 
-# 4. Wire up the graph with edges
+# GRAPH WIRING
 workflow.set_entry_point("planner")
+workflow.add_edge("planner", "human_review")
+workflow.add_conditional_edges("human_review", review_router, {"coder": "coder", "end": END})
+workflow.add_conditional_edges("coder", coder_router, {"coder": "coder", "tester": "tester", "debugger": "debugger"})
+workflow.add_conditional_edges("tester", test_router, {"debugger": "debugger", "end": END})
+workflow.add_edge("debugger", "planner")
 
-# After the planner runs, the first step always goes to the coder.
-workflow.add_edge("planner", "coder")
-
-# After the coder runs a step, we go to our "should_continue" router.
-# The router will then decide whether to loop back to the 'coder' node
-# or go to the special 'END' node.
-workflow.add_conditional_edges(
-    "coder",
-    should_continue,
-    {
-        "continue_coding": "coder", # If the router returns this, loop back.
-        "end": END                 # If the router returns this, finish.
-    }
-)
-
-# 5. Compile the graph into a runnable application
 app = workflow.compile()
-print("--- The Forge workflow is compiled and ready. ---")
+print("--- The Forge workflow (with Human-in-the-Loop) is compiled. ---")
 
-# This part allows us to run the test from the command line.
-async def run_the_forge():
-    print("\n--- Starting a new run of The Forge ---")
-    task = "Create a simple python script named 'hello.py' that prints 'hello from The Forge'."
-    initial_state: ForgeState = {"task": task}
+# MAIN EXECUTION FUNCTION
+async def main():
+    parser = argparse.ArgumentParser(description="Run The Forge AI Coder.")
+    parser.add_argument("task", type=str, help="The task for the AI to perform.")
+    args = parser.parse_args()
+    initial_state: ForgeState = {"task": args.task, "current_step": 0}
+    print(f"\n--- Starting a new run of The Forge (Task: {args.task}) ---")
+    if os.path.exists("word_counter.py"): os.remove("word_counter.py")
+    if os.path.exists("test_word_counter.py"): os.remove("test_word_counter.py")
+    if os.path.exists("tests"): shutil.rmtree("tests")
 
-    # Stream the events to see the flow in real-time
-    async for event in app.astream(initial_state):
-        for key, value in event.items():
-            print(f"--- Event: Node '{key}' ---")
-            print(value)
-            print("\n")
+    config = {"recursion_limit": 15}
+    async for event in app.astream(initial_state, config=config):
+        for key, value in event.items(): print(f"--- Event: Node '{key}' ---\n{value}\n")
 
 if __name__ == "__main__":
-    asyncio.run(run_the_forge())
+    asyncio.run(main())
