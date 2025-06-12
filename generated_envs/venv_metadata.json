@@ -53,5 +53,79 @@
     "created": "2025-06-12T22:49:41.069447",
     "libraries": [],
     "task_raw_name": "Create a password generator that creates random passwords with letters and numbers"
+  },
+  "Create_a_simple_expense_tracker_that_stores_expenses_in_a_CSV_fi_5d0170b1": {
+    "path": "generated_envs\\Create_a_simple_expense_tracker_that_stores_expenses_in_a_CSV_fi_5d0170b1",
+    "created": "2025-06-12T23:00:37.417250",
+    "libraries": [],
+    "task_raw_name": "Create a simple expense tracker that stores expenses in a CSV file"
+  },
+  "Create_a_URL_shortener_that_stores_mappings_in_a_JSON_file": {
+    "path": "generated_envs\\Create_a_URL_shortener_that_stores_mappings_in_a_JSON_file",
+    "created": "2025-06-12T23:16:53.727101",
+    "libraries": [],
+    "task_raw_name": "Create a URL shortener that stores mappings in a JSON file"
+  },
+  "Create_a_weather_data_logger_that_fetches_and_stores_daily_tempe_f614f55e": {
+    "path": "generated_envs\\Create_a_weather_data_logger_that_fetches_and_stores_daily_tempe_f614f55e",
+    "created": "2025-06-12T23:30:01.487116",
+    "libraries": [
+      "requests",
+      "pandas"
+    ],
+    "task_raw_name": "Create a weather data logger that fetches and stores daily temperatures"
+  },
+  "Build_a_basic_email_validator_that_checks_email_format_and_domai_ce788905": {
+    "path": "generated_envs\\Build_a_basic_email_validator_that_checks_email_format_and_domai_ce788905",
+    "created": "2025-06-12T23:32:46.781459",
+    "libraries": [
+      "validators",
+      "dnspython"
+    ],
+    "task_raw_name": "Build a basic email validator that checks email format and domain existence"
+  },
+  "Create_a_file_backup_utility_that_copies_files_to_a_backup_direc_8e8c3926": {
+    "path": "generated_envs\\Create_a_file_backup_utility_that_copies_files_to_a_backup_direc_8e8c3926",
+    "created": "2025-06-12T23:37:13.376544",
+    "libraries": [],
+    "task_raw_name": "Create a file backup utility that copies files to a backup directory with timestamps"
+  },
+  "Build_a_simple_task_scheduler_that_runs_commands_at_specified_ti_27a3422c": {
+    "path": "generated_envs\\Build_a_simple_task_scheduler_that_runs_commands_at_specified_ti_27a3422c",
+    "created": "2025-06-12T23:39:06.234631",
+    "libraries": [
+      "schedule"
+    ],
+    "task_raw_name": "Build a simple task scheduler that runs commands at specified times"
+  },
+  "Create_a_data_parser_that_converts_JSON_files_to_CSV_format": {
+    "path": "generated_envs\\Create_a_data_parser_that_converts_JSON_files_to_CSV_format",
+    "created": "2025-06-12T23:39:39.906882",
+    "libraries": [
+      "pandas"
+    ],
+    "task_raw_name": "Create a data parser that converts JSON files to CSV format"
+  },
+  "Build_a_basic_web_server_that_serves_static_HTML_files": {
+    "path": "generated_envs\\Build_a_basic_web_server_that_serves_static_HTML_files",
+    "created": "2025-06-12T23:40:33.613047",
+    "libraries": [],
+    "task_raw_name": "Build a basic web server that serves static HTML files"
+  },
+  "Create_a_system_monitor_that_logs_CPU_and_memory_usage_to_a_file": {
+    "path": "generated_envs\\Create_a_system_monitor_that_logs_CPU_and_memory_usage_to_a_file",
+    "created": "2025-06-12T23:42:13.704283",
+    "libraries": [
+      "psutil"
+    ],
+    "task_raw_name": "Create a system monitor that logs CPU and memory usage to a file"
+  },
+  "Build_a_simple_chat_logger_that_timestamps_and_stores_messages": {
+    "path": "generated_envs\\Build_a_simple_chat_logger_that_timestamps_and_stores_messages",
+    "created": "2025-06-12T23:43:06.362184",
+    "libraries": [
+      "datetime"
+    ],
+    "task_raw_name": "Build a simple chat logger that timestamps and stores messages"
   }
 }
