@@ -7,5 +7,51 @@
       "pytest"
     ],
     "task_raw_name": "Create a CLI tool that converts a Markdown file to HTML. The tool should be in a 'src' directory. It must use the 'markdown2' library. It should take a source file path as a command-line argument and print the resulting HTML to the console. Create a 'tests' directory with a pytest file to test the conversion logic."
+  },
+  "_200_Build_a_Python_command_line_tool_that_analyzes_the_sentimen_7133d0ad": {
+    "path": "generated_envs\\_200_Build_a_Python_command_line_tool_that_analyzes_the_sentimen_7133d0ad",
+    "created": "2025-06-12T20:29:56.169264",
+    "libraries": [
+      "textblob"
+    ],
+    "task_raw_name": "\u001b[200~Build a Python command-line tool that analyzes the sentiment of text files using a third-party natural language processing library.\n\n2\ufe0f\u20e3 Functionality:\n\nThe tool takes a source file path as a command-line argument.\n\nThe file will contain plain text (assume .txt file).\n\nYour tool reads the file contents.\n\nIt uses the TextBlob library (or any other NLP library you select and install via pip) to perform sentiment analysis.\n\nIt prints the sentiment polarity and subjectivity scores to the console.\n\nThe console output should include:\n\nFile name being analyzed.\n\nSentiment polarity (range -1 to 1).\n\nSentiment subjectivity (range 0 to 1).\n\n3\ufe0f\u20e3 Directory Structure:\n\ncss\nCopy\nEdit\nproject_root/\n\u251c\u2500\u2500 src/\n\u2502   \u2514\u2500\u2500 sentiment_analyzer.py\n\u2514\u2500\u2500 tests/\n    \u2514\u2500\u2500 test_sentiment_analyzer.py\n4\ufe0f\u20e3 Testing:\n\nWrite unit tests in the tests/ directory using pytest.\n\nInclude at least 3 test cases covering:\n\nPositive sentiment.\n\nNegative sentiment.\n\nNeutral sentiment.\n\nThe tests should call the core sentiment analysis function directly (not via CLI).\n\n5\ufe0f\u20e3 Other Requirements:\n\nFollow Python best practices.\n\nInclude error handling for:\n\nFile not found.\n\nEmpty files.\n\nNon-text file formats.\n\nEnsure proper docstrings and type hints.\n\n6\ufe0f\u20e3 Installation Instructions:\n\nUse requirements.txt to specify dependencies.\n\n7\ufe0f\u20e3 Creativity:\n\nYou may improve or extend the design as you see fit.\n\nYou may include logging or enhanced output formatting if appropriate.\n\n\u2705 When finished, your code must be executable by simply running:~"
+  },
+  "Build_a_Python_command_line_tool_that_analyzes_the_sentiment_of__bbc65c7b": {
+    "path": "generated_envs\\Build_a_Python_command_line_tool_that_analyzes_the_sentiment_of__bbc65c7b",
+    "created": "2025-06-12T22:03:31.385671",
+    "libraries": [
+      "textblob",
+      "nltk",
+      "numpy",
+      "pandas"
+    ],
+    "task_raw_name": "Build a Python command-line tool that analyzes the sentiment of text files using a third-party natural language processing library."
+  },
+  "Build_a_basic_web_scraper_that_extracts_titles_from_a_website": {
+    "path": "generated_envs\\Build_a_basic_web_scraper_that_extracts_titles_from_a_website",
+    "created": "2025-06-12T22:40:29.053998",
+    "libraries": [
+      "requests",
+      "beautifulsoup4"
+    ],
+    "task_raw_name": "Build a basic web scraper that extracts titles from a website"
+  },
+  "Create_a_file_organizer_that_sorts_files_by_extension_into_folde_0201b63c": {
+    "path": "generated_envs\\Create_a_file_organizer_that_sorts_files_by_extension_into_folde_0201b63c",
+    "created": "2025-06-12T22:41:33.027256",
+    "libraries": [],
+    "task_raw_name": "Create a file organizer that sorts files by extension into folders"
+  },
+  "Build_a_simple_quiz_application_with_multiple_choice_questions": {
+    "path": "generated_envs\\Build_a_simple_quiz_application_with_multiple_choice_questions",
+    "created": "2025-06-12T22:42:35.128417",
+    "libraries": [],
+    "task_raw_name": "Build a simple quiz application with multiple choice questions"
+  },
+  "Create_a_password_generator_that_creates_random_passwords_with_l_5904a6af": {
+    "path": "generated_envs\\Create_a_password_generator_that_creates_random_passwords_with_l_5904a6af",
+    "created": "2025-06-12T22:49:41.069447",
+    "libraries": [],
+    "task_raw_name": "Create a password generator that creates random passwords with letters and numbers"
   }
 }

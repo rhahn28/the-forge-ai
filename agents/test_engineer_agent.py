@@ -17,14 +17,13 @@ class TestEngineerAgent:
             task_name = state.get("task", "default_task")
             env_path = self.venv_resolver.get_venv_path(task_name)
 
-            # ✅ Platform-specific command
             if os.name == 'nt':
-                cmd = "set PYTHONPATH=src&& pytest tests"
+                cmd = "set PYTHONPATH=.&& pytest tests"
             else:
-                cmd = "PYTHONPATH=src pytest tests"
+                cmd = "PYTHONPATH=. pytest tests"
 
             env = os.environ.copy()
-            env["PYTHONPATH"] = "src"
+            env["PYTHONPATH"] = "."
 
             result = await self.shell_client.run_command(cmd, venv_path=env_path, extra_env=env)
 
@@ -39,6 +38,7 @@ class TestEngineerAgent:
                 print("---TEST ENGINEER: Tests FAILED! ---")
                 return {
                     "error": f"pytest failed with the following output:\n\n"
-                             f"STDOUT:\n{result.get('stdout')}\n\nSTDERR:\n{result.get('stderr')}"}
+                             f"STDOUT:\n{result.get('stdout')}\n\nSTDERR:\n{result.get('stderr')}"
+                }
         except Exception as e:
             return {"error": str(e)}

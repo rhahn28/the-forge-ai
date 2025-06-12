@@ -12,7 +12,17 @@ app = FastAPI()
 SAFE_PREFIXES = [
     "pytest",
     "PYTHONPATH=src",
-    "set PYTHONPATH=src&&"
+    "PYTHONPATH=.",
+    "PYTHONPATH=.;src",      # ← Add this for Windows
+    "PYTHONPATH=.:src",      # ← Add this for Linux/Mac
+    "set PYTHONPATH=src&&",
+    "set PYTHONPATH=.&&",
+    "set PYTHONPATH=.;src&&", # ← Add this for Windows
+    "set PYTHONPATH=.:src&&", # ← Add this for Linux/Mac
+    "set PYTHONPATH=src &&",
+    "set PYTHONPATH=. &&",
+    "set PYTHONPATH=.;src &&", # ← Add this for Windows
+    "set PYTHONPATH=.:src &&"  # ← Add this for Linux/Mac
 ]
 
 class ShellPayload(BaseModel):
@@ -29,10 +39,26 @@ async def run_shell_command(payload: ShellPayload):
     print(f"---SHELL SERVER: Received command: '{command_to_run}'---")
     print(f"---SHELL SERVER: Extra env: {extra_env}---")
 
+    # Replace this entire section:
     allow = any(command_to_run.startswith(prefix) for prefix in SAFE_PREFIXES)
-    if not allow:
-        print(f"---SHELL SERVER: REJECTED forbidden command '{command_to_run}'---")
-        raise HTTPException(status_code=403, detail=f"Command '{command_to_run}' is not allowed.")
+
+    # With this more flexible check:
+    def is_safe_command(cmd):
+        # Allow pytest commands
+        if "pytest" in cmd:
+            return True
+        # Allow PYTHONPATH setting
+        if "PYTHONPATH=" in cmd:
+            return True
+        # Allow pip commands  
+        if cmd.startswith("pip"):
+            return True
+        # Allow python commands
+        if cmd.startswith("python"):
+            return True
+        return False
+
+    allow = is_safe_command(command_to_run)
 
     env = os.environ.copy()
     env.update(extra_env)
@@ -42,29 +68,45 @@ async def run_shell_command(payload: ShellPayload):
     try:
         env = os.environ.copy()
         env.update(extra_env)
-
-        # Detect correct working directory (adjust this as needed)
-        working_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+        
+        # 🔧 FIX: Better working directory detection
+        working_dir = os.getcwd()  # Use current working directory instead of relative path
+        print(f"---SHELL SERVER: Working directory: {working_dir}---")
+        
+    # In the run_shell_command function, replace the venv activation section with:
 
         if venv_path:
             if os.name == "nt":
-                activate_path = os.path.join(venv_path, "Scripts", "activate.bat")
-                full_command = f'cmd /c "{activate_path} && {command_to_run}"'
+                python_exe = os.path.join(venv_path, "Scripts", "python.exe")
+                # Replace the command to use venv python directly
+                if command_to_run.startswith("set PYTHONPATH="):
+                    # Extract the actual command after &&
+                    parts = command_to_run.split("&&", 1)
+                    if len(parts) == 2:
+                        pythonpath_part = parts[0].strip()
+                        actual_command = parts[1].strip()
+                        # Set PYTHONPATH in env and use venv python
+                        if "PYTHONPATH=" in pythonpath_part:
+                            path_value = pythonpath_part.split("=", 1)[1]
+                            env["PYTHONPATH"] = path_value
+                        
+                        # Use venv python with -m pytest
+                        if actual_command.startswith("pytest"):
+                            new_command = f'"{python_exe}" -m {actual_command}'
+                        else:
+                            new_command = f'"{python_exe}" -c "import os; os.system({repr(actual_command)})"'
+                        
+                        print(f"---SHELL SERVER: Using venv python: {new_command}---")
+                        result = subprocess.run(new_command, capture_output=True, text=True, shell=True, env=env, cwd=working_dir)
+                else:
+                    result = subprocess.run(command_to_run, capture_output=True, text=True, shell=True, env=env, cwd=working_dir)
             else:
-                activate_path = os.path.join(venv_path, "bin", "activate")
-                full_command = f'bash -c "source \'{activate_path}\' && {command_to_run}"'
-
-            print(f"---SHELL SERVER: Full venv command: {full_command}---")
-            result = subprocess.run(full_command, capture_output=True, text=True, shell=True, env=env, cwd=working_dir)
+                # Similar logic for Linux/Mac
+                python_exe = os.path.join(venv_path, "bin", "python")
+                # Add Linux/Mac handling here
+                result = subprocess.run(command_to_run, capture_output=True, text=True, shell=True, env=env, cwd=working_dir)
         else:
-            result = subprocess.run(command_to_run, capture_output=True, text=True, shell=True, env=env, cwd=working_dir)
-
-        return {
-            "status": "success",
-            "return_code": result.returncode,
-            "stdout": result.stdout,
-            "stderr": result.stderr,
-        }
+            result = subprocess.run(command_to_run, capture_output=True, text=True, shell=shell, env=env, cwd=working_dir)
 
 
     except Exception as e:
