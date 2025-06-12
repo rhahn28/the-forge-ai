@@ -1,71 +1,118 @@
 # agents/planner_agent.py
-import httpx # The library for making network requests to our tool server.
-from state import ForgeState # We import our central state definition.
+import httpx
+import json
+import re
+from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
+from langchain.prompts import ChatPromptTemplate
+from langchain.schema import StrOutputParser
+from state import ForgeState
+from core.file_client import FileSystemClient
 
-class FileSystemClient:
-    """
-    This is the agent's 'remote control' for the FileSystemMCPServer.
-    It's a dedicated client that knows how to format requests and talk to our tool.
-    This keeps networking logic separate from the agent's core 'thinking' logic.
-    """
-    def __init__(self, base_url="http://127.0.0.1:8000"):
-        self.base_url = base_url
-
-    async def read_file(self, path: str):
-        # Use httpx to create an asynchronous client session.
-        async with httpx.AsyncClient() as client:
-            print(f"CLIENT: Sending READ request for '{path}' to {self.base_url}")
-            # Send a POST request to the server's /read_file endpoint.
-            response = await client.post(f"{self.base_url}/read_file", json={"path": path})
-            # This will automatically raise an error if the server returns a bad status (like 404 or 500).
-            response.raise_for_status()
-            # Return the 'content' part of the JSON response from the server.
-            return response.json()['content']
-
-    async def write_file(self, path: str, content: str):
-        async with httpx.AsyncClient() as client:
-            print(f"CLIENT: Sending WRITE request for '{path}' to {self.base_url}")
-            response = await client.post(f"{self.base_url}/write_file", json={"path": path, "content": content})
-            response.raise_for_status()
-            return response.json()
 
 class PlannerAgent:
     """
-    This class contains the agent's core logic.
-    For Phase 1, its job is simple: read a file and write a file.
+    This agent uses an LLM to generate a detailed, structured JSON plan.
     """
     def __init__(self):
-        # The agent creates an instance of its tool client. It now "has a" remote control.
+        load_dotenv()
         self.fs_client = FileSystemClient()
+        
+        prompt_template = """
+You are a code generation bot. Your sole purpose is to convert a user's request into a series of commands in a JSON format.
+You MUST ONLY output a valid JSON list of objects, even if the plan only contains one step.
+
+The user's request is: "{task}"
+The current files in the directory are: "{files}"
+
+Each object in the JSON list MUST have a "command" key and a "path" key.
+If the command is "WRITE_TO_FILE", it MUST also include a "content" key.
+The only valid commands are "CREATE_FILE" and "WRITE_TO_FILE".
+
+This is an example of a valid response for a multi-step plan:
+```json
+[
+    {{
+        "command": "CREATE_FILE",
+        "path": "example.py"
+    }},
+    {{
+        "command": "WRITE_TO_FILE",
+        "path": "example.py",
+        "content": "print('This is an example')"
+    }}
+]
+
+This is an example of a valid response for a single-step plan:
+
+[
+    {{
+        "command": "CREATE_FILE",
+        "path": "single_file.py"
+    }}
+]
+
+
+
+
+NOW, GENERATE THE PLAN FOR THE USER'S REQUEST. Output ONLY the JSON list, inside a ```json code block.
+"""
+
+        # --- Instruction 4 in the recipe ---
+        # Because this line has the same indentation, it is the very next step
+        # in the same recipe. Python now creates an attribute on our object
+        # called 'self.llm_chain'. To do this, it USES the 'prompt_template'
+        # variable it created in the step right above.
+        self.llm_chain = (
+            ChatPromptTemplate.from_template(prompt_template)
+            | ChatOpenAI(model="gpt-4o", response_format={"type": "json_object"})
+            | StrOutputParser()
+        )
+    
+    # Now the recipe for __init__ is finished.
+    # This 'run' method is also part of the PlannerAgent class, but it's a different recipe.
+
+
+
 
     async def run(self, state: ForgeState) -> dict:
         """
         This is the main entry point for the agent's logic.
-        LangGraph will call this function and pass it the current state.
         """
-        # This is our new debugging line to see if the agent's code is even being called.
-        print("DEBUG: PlannerAgent.run() method has been called.")
-        print("---PLANNER AGENT: Starting operation.---")
-        
-        # 1. Read the initial task from the state dictionary.
-        input_file = state['task']
-        output_file = "plan.txt" # We'll hardcode the output file for now.
-        
+        print("---PLANNER AGENT (JSON): Generating a plan...---")
+        plan_str = ""
         try:
-            # 2. Use the tool client to perform the first action.
-            content = await self.fs_client.read_file(input_file)
+            current_files = await self.fs_client.list_files()
+            plan_str = await self.llm_chain.ainvoke({
+                "task": state['task'],
+                "files": ", ".join(current_files) if current_files else "No files yet."
+            })
             
-            # 3. Use the tool client to perform the second action.
-            await self.fs_client.write_file(output_file, f"PLAN FROM FILE:\n{content}")
+            parsed_json = json.loads(plan_str)
             
-            result_message = f"Successfully processed '{input_file}' to '{output_file}'."
-            print("---PLANNER AGENT: Finished successfully.---")
+            # --- NEW ROBUST LOGIC ---
+            # If the AI returns a single dictionary instead of a list of dictionaries,
+            # we will automatically wrap it in a list to handle the case.
+            if isinstance(parsed_json, dict):
+                # Check if it's a plan list nested under a key
+                if len(parsed_json) == 1 and isinstance(next(iter(parsed_json.values())), list):
+                    plan_list = next(iter(parsed_json.values()))
+                else: # It's a single command object
+                    print("---INFO: AI returned a single command object. Wrapping it in a list.---")
+                    plan_list = [parsed_json]
+            elif isinstance(parsed_json, list):
+                plan_list = parsed_json
+            else:
+                raise ValueError("Parsed JSON is not a recognized format (list or dict).")
+            # --- END OF NEW LOGIC ---
 
-            # 4. Return a dictionary to update the central state.
-            return {"result": result_message}
+            print("---PLANNER AGENT: Plan Generated.---")
+            print(plan_list)
             
+            return {"plan": plan_list, "current_step": 0}
         except Exception as e:
-            error_message = f"An error occurred: {e}"
-            print(f"---PLANNER AGENT: {error_message}---")
-            # If something goes wrong, update the 'error' field in the state.
-            return {"error": error_message}
+            print(f"---PLANNER AGENT: ERROR - {e}---")
+            print("---RAW LLM OUTPUT THAT CAUSED ERROR:---")
+            print(plan_str)
+            print("---------------------------------------")
+            return {"error": str(e)}

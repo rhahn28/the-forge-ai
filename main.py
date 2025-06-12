@@ -1,55 +1,76 @@
-# main.py
 import asyncio
 from langgraph.graph import StateGraph, END
 from state import ForgeState
 from agents.planner_agent import PlannerAgent
+from agents.code_generator_agent import CodeGenerationAgent
 
-async def main():
+# 1. Initialize our agents
+planner_agent = PlannerAgent()
+coder_agent = CodeGenerationAgent()
+
+# 2. Define the graph nodes
+workflow = StateGraph(ForgeState)
+workflow.add_node("planner", planner_agent.run)
+workflow.add_node("coder", coder_agent.execute_step)
+
+# 3. Define the routing logic function
+def should_continue(state: ForgeState):
     """
-    This is the main function that sets up and runs our agentic workflow.
+    This is our "router." It checks the state and decides where to go next.
     """
-    print("DEBUG: Entered the main() function.")
-    
-    # SETUP: For this test run, we need a file for our agent to read.
-    with open("prompt.txt", "w", encoding="utf-8") as f:
-        f.write("This is the initial task from the user.")
-    print("DEBUG: Created a dummy 'prompt.txt' file for the test.")
+    print("---ROUTER: Checking state...---")
+    # If there was an error in the last step, end the workflow.
+    if state.get("error"):
+        print("---ROUTER: Error detected. Ending workflow.---")
+        return "end"
 
-    # 1. Initialize our agent
-    planner_agent = PlannerAgent()
-    print("DEBUG: Initialized PlannerAgent.")
+    # Get the plan and the current step from the state.
+    plan = state.get("plan", [])
+    current_step = state.get("current_step", 0)
 
-    # 2. Define the graph
-    workflow = StateGraph(ForgeState)
-    workflow.add_node("planner", planner_agent.run)
-    workflow.set_entry_point("planner")
-    workflow.add_edge("planner", END)
-    print("DEBUG: Graph definition complete.")
+    # If the current step is beyond the length of the plan, we're done.
+    if current_step >= len(plan):
+        print("---ROUTER: Plan complete. Ending workflow.---")
+        return "end"
+    else:
+        # Otherwise, continue to the coder.
+        print(f"---ROUTER: Plan has {len(plan) - current_step} steps remaining. Continuing.---")
+        return "continue_coding"
 
-    # 3. Compile the graph
-    app = workflow.compile()
-    print("DEBUG: Workflow compiled successfully.")
+# 4. Wire up the graph with edges
+workflow.set_entry_point("planner")
 
-    print("\n--- Running The Forge ---")
-    initial_state = {"task": "prompt.txt"}
-    
-    # 4. Invoke the graph inside a try/except block to catch any errors
-    final_state = None
-    try:
-        print("DEBUG: About to invoke the graph...")
-        final_state = await app.ainvoke(initial_state)
-        print("DEBUG: Graph invocation finished.")
-    except Exception as e:
-        print(f"FATAL ERROR during graph invocation: {e}")
-        import traceback
-        traceback.print_exc() # Print the full error stack trace
+# After the planner runs, the first step always goes to the coder.
+workflow.add_edge("planner", "coder")
 
-    print("\n--- The Forge has finished its run ---")
-    print("Final State:")
-    print(final_state)
+# After the coder runs a step, we go to our "should_continue" router.
+# The router will then decide whether to loop back to the 'coder' node
+# or go to the special 'END' node.
+workflow.add_conditional_edges(
+    "coder",
+    should_continue,
+    {
+        "continue_coding": "coder", # If the router returns this, loop back.
+        "end": END                 # If the router returns this, finish.
+    }
+)
+
+# 5. Compile the graph into a runnable application
+app = workflow.compile()
+print("--- The Forge workflow is compiled and ready. ---")
+
+# This part allows us to run the test from the command line.
+async def run_the_forge():
+    print("\n--- Starting a new run of The Forge ---")
+    task = "Create a simple python script named 'hello.py' that prints 'hello from The Forge'."
+    initial_state: ForgeState = {"task": task}
+
+    # Stream the events to see the flow in real-time
+    async for event in app.astream(initial_state):
+        for key, value in event.items():
+            print(f"--- Event: Node '{key}' ---")
+            print(value)
+            print("\n")
 
 if __name__ == "__main__":
-    # This block is what runs when you execute 'python main.py'
-    print("DEBUG: Script started. Running main function...")
-    asyncio.run(main())
-    print("DEBUG: Script finished.")
+    asyncio.run(run_the_forge())
