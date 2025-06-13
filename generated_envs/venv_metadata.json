@@ -1,131 +1,32 @@
 {
-  "Create_a_CLI_tool_that_converts_a_Markdown_file_to_HTML_The_tool_7ecb9110": {
-    "path": "generated_envs\\Create_a_CLI_tool_that_converts_a_Markdown_file_to_HTML_The_tool_7ecb9110",
-    "created": "2025-06-12T12:48:37.270499",
+  "Build_an_automated_deployment_pipeline_that_tests_builds_and_dep_439ef634": {
+    "path": "generated_envs\\Build_an_automated_deployment_pipeline_that_tests_builds_and_dep_439ef634",
+    "created": "2025-06-13T00:01:10.459028",
     "libraries": [
-      "markdown2",
-      "pytest"
+      "nodejs",
+      "npm",
+      "docker"
     ],
-    "task_raw_name": "Create a CLI tool that converts a Markdown file to HTML. The tool should be in a 'src' directory. It must use the 'markdown2' library. It should take a source file path as a command-line argument and print the resulting HTML to the console. Create a 'tests' directory with a pytest file to test the conversion logic."
+    "task_raw_name": "Build an automated deployment pipeline that tests, builds, and deploys applications to cloud servers"
   },
-  "_200_Build_a_Python_command_line_tool_that_analyzes_the_sentimen_7133d0ad": {
-    "path": "generated_envs\\_200_Build_a_Python_command_line_tool_that_analyzes_the_sentimen_7133d0ad",
-    "created": "2025-06-12T20:29:56.169264",
+  "Create_a_monitoring_dashboard_that_collects_metrics_from_multipl_364ddc53": {
+    "path": "generated_envs\\Create_a_monitoring_dashboard_that_collects_metrics_from_multipl_364ddc53",
+    "created": "2025-06-13T00:03:38.455606",
     "libraries": [
-      "textblob"
+      "prometheus_client",
+      "flask",
+      "matplotlib"
     ],
-    "task_raw_name": "\u001b[200~Build a Python command-line tool that analyzes the sentiment of text files using a third-party natural language processing library.\n\n2\ufe0f\u20e3 Functionality:\n\nThe tool takes a source file path as a command-line argument.\n\nThe file will contain plain text (assume .txt file).\n\nYour tool reads the file contents.\n\nIt uses the TextBlob library (or any other NLP library you select and install via pip) to perform sentiment analysis.\n\nIt prints the sentiment polarity and subjectivity scores to the console.\n\nThe console output should include:\n\nFile name being analyzed.\n\nSentiment polarity (range -1 to 1).\n\nSentiment subjectivity (range 0 to 1).\n\n3\ufe0f\u20e3 Directory Structure:\n\ncss\nCopy\nEdit\nproject_root/\n\u251c\u2500\u2500 src/\n\u2502   \u2514\u2500\u2500 sentiment_analyzer.py\n\u2514\u2500\u2500 tests/\n    \u2514\u2500\u2500 test_sentiment_analyzer.py\n4\ufe0f\u20e3 Testing:\n\nWrite unit tests in the tests/ directory using pytest.\n\nInclude at least 3 test cases covering:\n\nPositive sentiment.\n\nNegative sentiment.\n\nNeutral sentiment.\n\nThe tests should call the core sentiment analysis function directly (not via CLI).\n\n5\ufe0f\u20e3 Other Requirements:\n\nFollow Python best practices.\n\nInclude error handling for:\n\nFile not found.\n\nEmpty files.\n\nNon-text file formats.\n\nEnsure proper docstrings and type hints.\n\n6\ufe0f\u20e3 Installation Instructions:\n\nUse requirements.txt to specify dependencies.\n\n7\ufe0f\u20e3 Creativity:\n\nYou may improve or extend the design as you see fit.\n\nYou may include logging or enhanced output formatting if appropriate.\n\n\u2705 When finished, your code must be executable by simply running:~"
+    "task_raw_name": "Create a monitoring dashboard that collects metrics from multiple services and displays real-time graphs"
   },
-  "Build_a_Python_command_line_tool_that_analyzes_the_sentiment_of__bbc65c7b": {
-    "path": "generated_envs\\Build_a_Python_command_line_tool_that_analyzes_the_sentiment_of__bbc65c7b",
-    "created": "2025-06-12T22:03:31.385671",
+  "Create_a_cryptocurrency_trading_bot_that_connects_to_exchange_AP_b889db31": {
+    "path": "generated_envs\\Create_a_cryptocurrency_trading_bot_that_connects_to_exchange_AP_b889db31",
+    "created": "2025-06-13T00:05:10.113077",
     "libraries": [
-      "textblob",
-      "nltk",
-      "numpy",
-      "pandas"
+      "ccxt",
+      "pandas",
+      "numpy"
     ],
-    "task_raw_name": "Build a Python command-line tool that analyzes the sentiment of text files using a third-party natural language processing library."
-  },
-  "Build_a_basic_web_scraper_that_extracts_titles_from_a_website": {
-    "path": "generated_envs\\Build_a_basic_web_scraper_that_extracts_titles_from_a_website",
-    "created": "2025-06-12T22:40:29.053998",
-    "libraries": [
-      "requests",
-      "beautifulsoup4"
-    ],
-    "task_raw_name": "Build a basic web scraper that extracts titles from a website"
-  },
-  "Create_a_file_organizer_that_sorts_files_by_extension_into_folde_0201b63c": {
-    "path": "generated_envs\\Create_a_file_organizer_that_sorts_files_by_extension_into_folde_0201b63c",
-    "created": "2025-06-12T22:41:33.027256",
-    "libraries": [],
-    "task_raw_name": "Create a file organizer that sorts files by extension into folders"
-  },
-  "Build_a_simple_quiz_application_with_multiple_choice_questions": {
-    "path": "generated_envs\\Build_a_simple_quiz_application_with_multiple_choice_questions",
-    "created": "2025-06-12T22:42:35.128417",
-    "libraries": [],
-    "task_raw_name": "Build a simple quiz application with multiple choice questions"
-  },
-  "Create_a_password_generator_that_creates_random_passwords_with_l_5904a6af": {
-    "path": "generated_envs\\Create_a_password_generator_that_creates_random_passwords_with_l_5904a6af",
-    "created": "2025-06-12T22:49:41.069447",
-    "libraries": [],
-    "task_raw_name": "Create a password generator that creates random passwords with letters and numbers"
-  },
-  "Create_a_simple_expense_tracker_that_stores_expenses_in_a_CSV_fi_5d0170b1": {
-    "path": "generated_envs\\Create_a_simple_expense_tracker_that_stores_expenses_in_a_CSV_fi_5d0170b1",
-    "created": "2025-06-12T23:00:37.417250",
-    "libraries": [],
-    "task_raw_name": "Create a simple expense tracker that stores expenses in a CSV file"
-  },
-  "Create_a_URL_shortener_that_stores_mappings_in_a_JSON_file": {
-    "path": "generated_envs\\Create_a_URL_shortener_that_stores_mappings_in_a_JSON_file",
-    "created": "2025-06-12T23:16:53.727101",
-    "libraries": [],
-    "task_raw_name": "Create a URL shortener that stores mappings in a JSON file"
-  },
-  "Create_a_weather_data_logger_that_fetches_and_stores_daily_tempe_f614f55e": {
-    "path": "generated_envs\\Create_a_weather_data_logger_that_fetches_and_stores_daily_tempe_f614f55e",
-    "created": "2025-06-12T23:30:01.487116",
-    "libraries": [
-      "requests",
-      "pandas"
-    ],
-    "task_raw_name": "Create a weather data logger that fetches and stores daily temperatures"
-  },
-  "Build_a_basic_email_validator_that_checks_email_format_and_domai_ce788905": {
-    "path": "generated_envs\\Build_a_basic_email_validator_that_checks_email_format_and_domai_ce788905",
-    "created": "2025-06-12T23:32:46.781459",
-    "libraries": [
-      "validators",
-      "dnspython"
-    ],
-    "task_raw_name": "Build a basic email validator that checks email format and domain existence"
-  },
-  "Create_a_file_backup_utility_that_copies_files_to_a_backup_direc_8e8c3926": {
-    "path": "generated_envs\\Create_a_file_backup_utility_that_copies_files_to_a_backup_direc_8e8c3926",
-    "created": "2025-06-12T23:37:13.376544",
-    "libraries": [],
-    "task_raw_name": "Create a file backup utility that copies files to a backup directory with timestamps"
-  },
-  "Build_a_simple_task_scheduler_that_runs_commands_at_specified_ti_27a3422c": {
-    "path": "generated_envs\\Build_a_simple_task_scheduler_that_runs_commands_at_specified_ti_27a3422c",
-    "created": "2025-06-12T23:39:06.234631",
-    "libraries": [
-      "schedule"
-    ],
-    "task_raw_name": "Build a simple task scheduler that runs commands at specified times"
-  },
-  "Create_a_data_parser_that_converts_JSON_files_to_CSV_format": {
-    "path": "generated_envs\\Create_a_data_parser_that_converts_JSON_files_to_CSV_format",
-    "created": "2025-06-12T23:39:39.906882",
-    "libraries": [
-      "pandas"
-    ],
-    "task_raw_name": "Create a data parser that converts JSON files to CSV format"
-  },
-  "Build_a_basic_web_server_that_serves_static_HTML_files": {
-    "path": "generated_envs\\Build_a_basic_web_server_that_serves_static_HTML_files",
-    "created": "2025-06-12T23:40:33.613047",
-    "libraries": [],
-    "task_raw_name": "Build a basic web server that serves static HTML files"
-  },
-  "Create_a_system_monitor_that_logs_CPU_and_memory_usage_to_a_file": {
-    "path": "generated_envs\\Create_a_system_monitor_that_logs_CPU_and_memory_usage_to_a_file",
-    "created": "2025-06-12T23:42:13.704283",
-    "libraries": [
-      "psutil"
-    ],
-    "task_raw_name": "Create a system monitor that logs CPU and memory usage to a file"
-  },
-  "Build_a_simple_chat_logger_that_timestamps_and_stores_messages": {
-    "path": "generated_envs\\Build_a_simple_chat_logger_that_timestamps_and_stores_messages",
-    "created": "2025-06-12T23:43:06.362184",
-    "libraries": [
-      "datetime"
-    ],
-    "task_raw_name": "Build a simple chat logger that timestamps and stores messages"
+    "task_raw_name": "Create a cryptocurrency trading bot that connects to exchange APIs and executes trades"
   }
 }
