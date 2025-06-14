@@ -1,0 +1,25 @@
+{"task_id": "d312fecb-381f-4732-a739-47e7952c9df0", "node": "planner", "state_snapshot": {"current_step": 0, "error": null}, "timestamp": "2025-06-13T22:13:02.275010"}
+{"task_id": "d312fecb-381f-4732-a739-47e7952c9df0", "node": "coder", "state_snapshot": {"current_step": 1}, "timestamp": "2025-06-13T22:13:02.277454"}
+{"task_id": "d312fecb-381f-4732-a739-47e7952c9df0", "node": "coder", "state_snapshot": {"current_step": 2}, "timestamp": "2025-06-13T22:13:02.278730"}
+{"task_id": "d312fecb-381f-4732-a739-47e7952c9df0", "node": "coder", "state_snapshot": {"error": "Failed on step {'command': 'INSTALL_LIBRARIES', 'path': None, 'content': None, 'libraries': ['markdown2']}: Pip install failed: None"}, "timestamp": "2025-06-13T22:13:08.149167"}
+{"task_id": "d312fecb-381f-4732-a739-47e7952c9df0", "node": "debugger", "state_snapshot": {"error": "Ensure that the 'markdown2' library is correctly specified in the requirements file or directly in the installation command, and verify that there is a stable internet connection to allow `pip install markdown2` to succeed."}, "timestamp": "2025-06-13T22:13:10.164999"}
+{"task_id": "d312fecb-381f-4732-a739-47e7952c9df0", "node": "planner", "state_snapshot": {"current_step": 0, "error": null}, "timestamp": "2025-06-13T22:13:19.319229"}
+{"task_id": "d312fecb-381f-4732-a739-47e7952c9df0", "node": "coder", "state_snapshot": {"current_step": 1}, "timestamp": "2025-06-13T22:13:19.321446"}
+{"task_id": "d312fecb-381f-4732-a739-47e7952c9df0", "node": "coder", "state_snapshot": {"current_step": 2}, "timestamp": "2025-06-13T22:13:19.322950"}
+{"task_id": "d312fecb-381f-4732-a739-47e7952c9df0", "node": "coder", "state_snapshot": {"error": "Failed on step {'command': 'INSTALL_LIBRARIES', 'path': None, 'content': None, 'libraries': ['markdown2']}: Pip install failed: None"}, "timestamp": "2025-06-13T22:13:19.458760"}
+{"task_id": "d312fecb-381f-4732-a739-47e7952c9df0", "node": "debugger", "state_snapshot": {"error": "Ensure that the 'markdown2' library is included in the project's dependencies (e.g., in a requirements.txt file) and that the testing environment has internet access to install it via pip."}, "timestamp": "2025-06-13T22:13:20.920277"}
+{"task_id": "d312fecb-381f-4732-a739-47e7952c9df0", "node": "planner", "state_snapshot": {"current_step": 0, "error": null}, "timestamp": "2025-06-13T22:13:30.841816"}
+{"task_id": "d312fecb-381f-4732-a739-47e7952c9df0", "node": "coder", "state_snapshot": {"current_step": 1}, "timestamp": "2025-06-13T22:13:30.843816"}
+{"task_id": "d312fecb-381f-4732-a739-47e7952c9df0", "node": "coder", "state_snapshot": {"current_step": 2}, "timestamp": "2025-06-13T22:13:30.986252"}
+{"task_id": "d312fecb-381f-4732-a739-47e7952c9df0", "node": "coder", "state_snapshot": {"current_step": 3}, "timestamp": "2025-06-13T22:13:31.135088"}
+{"task_id": "d312fecb-381f-4732-a739-47e7952c9df0", "node": "coder", "state_snapshot": {"current_step": 4}, "timestamp": "2025-06-13T22:13:31.136088"}
+{"task_id": "d312fecb-381f-4732-a739-47e7952c9df0", "node": "coder", "state_snapshot": {"current_step": 5}, "timestamp": "2025-06-13T22:13:31.283116"}
+{"task_id": "d312fecb-381f-4732-a739-47e7952c9df0", "node": "coder", "state_snapshot": {"current_step": 6}, "timestamp": "2025-06-13T22:13:31.431250"}
+{"task_id": "d312fecb-381f-4732-a739-47e7952c9df0", "node": "coder", "state_snapshot": {"current_step": 7}, "timestamp": "2025-06-13T22:13:31.579089"}
+{"task_id": "d312fecb-381f-4732-a739-47e7952c9df0", "node": "coder", "state_snapshot": {"current_step": 8}, "timestamp": "2025-06-13T22:13:31.724727"}
+{"task_id": "d312fecb-381f-4732-a739-47e7952c9df0", "node": "coder", "state_snapshot": {"error": "Failed on step {'command': 'INSTALL_LIBRARIES', 'path': None, 'content': None, 'libraries': ['markdown2']}: Pip install failed: None"}, "timestamp": "2025-06-13T22:13:31.873490"}
+{"task_id": "d312fecb-381f-4732-a739-47e7952c9df0", "node": "debugger", "state_snapshot": {"error": "Ensure that the 'markdown2' library is correctly specified in your dependencies or requirements file and that the Python environment is activated, then rerun the pip install command."}, "timestamp": "2025-06-13T22:13:32.862205"}
+{"task_id": "d312fecb-381f-4732-a739-47e7952c9df0", "node": "planner", "state_snapshot": {"current_step": 0, "error": null}, "timestamp": "2025-06-13T22:13:43.337463"}
+{"task_id": "d312fecb-381f-4732-a739-47e7952c9df0", "node": "coder", "state_snapshot": {"current_step": 1}, "timestamp": "2025-06-13T22:13:43.340172"}
+{"task_id": "d312fecb-381f-4732-a739-47e7952c9df0", "node": "coder", "state_snapshot": {"current_step": 2}, "timestamp": "2025-06-13T22:13:43.342380"}
+{"task_id": "d312fecb-381f-4732-a739-47e7952c9df0", "node": "coder", "state_snapshot": {"error": "Failed on step {'command': 'INSTALL_LIBRARIES', 'path': None, 'content': None, 'libraries': ['markdown2']}: Pip install failed: None"}, "timestamp": "2025-06-13T22:13:43.479737"}

@@ -1,0 +1,25 @@
+{"task_id": "4ec751eb-2b74-4b68-bda6-f854a1b93d1e", "node": "planner", "state_snapshot": {"current_step": 0, "error": null}, "timestamp": "2025-06-13T22:08:07.838152"}
+{"task_id": "4ec751eb-2b74-4b68-bda6-f854a1b93d1e", "node": "coder", "state_snapshot": {"current_step": 1}, "timestamp": "2025-06-13T22:08:07.841602"}
+{"task_id": "4ec751eb-2b74-4b68-bda6-f854a1b93d1e", "node": "coder", "state_snapshot": {"current_step": 2}, "timestamp": "2025-06-13T22:08:07.842601"}
+{"task_id": "4ec751eb-2b74-4b68-bda6-f854a1b93d1e", "node": "coder", "state_snapshot": {"error": "Failed on step {'command': 'INSTALL_LIBRARIES', 'path': None, 'content': None, 'libraries': ['markdown2']}: Pip install failed: None"}, "timestamp": "2025-06-13T22:08:07.978265"}
+{"task_id": "4ec751eb-2b74-4b68-bda6-f854a1b93d1e", "node": "debugger", "state_snapshot": {"error": "Ensure the 'markdown2' library is correctly specified in the project's dependencies, and verify that the environment where the test is running has internet access to download the library."}, "timestamp": "2025-06-13T22:08:09.278095"}
+{"task_id": "4ec751eb-2b74-4b68-bda6-f854a1b93d1e", "node": "planner", "state_snapshot": {"current_step": 0, "error": null}, "timestamp": "2025-06-13T22:08:20.173463"}
+{"task_id": "4ec751eb-2b74-4b68-bda6-f854a1b93d1e", "node": "coder", "state_snapshot": {"current_step": 1}, "timestamp": "2025-06-13T22:08:20.174905"}
+{"task_id": "4ec751eb-2b74-4b68-bda6-f854a1b93d1e", "node": "coder", "state_snapshot": {"current_step": 2}, "timestamp": "2025-06-13T22:08:20.176905"}
+{"task_id": "4ec751eb-2b74-4b68-bda6-f854a1b93d1e", "node": "coder", "state_snapshot": {"error": "Failed on step {'command': 'INSTALL_LIBRARIES', 'path': None, 'content': None, 'libraries': ['markdown2']}: Pip install failed: None"}, "timestamp": "2025-06-13T22:08:20.312995"}
+{"task_id": "4ec751eb-2b74-4b68-bda6-f854a1b93d1e", "node": "debugger", "state_snapshot": {"error": "Ensure that the 'markdown2' library is listed in the 'requirements.txt' file and installed in the virtual environment by running `pip install -r requirements.txt` before running the tests."}, "timestamp": "2025-06-13T22:08:21.415193"}
+{"task_id": "4ec751eb-2b74-4b68-bda6-f854a1b93d1e", "node": "planner", "state_snapshot": {"current_step": 0, "error": null}, "timestamp": "2025-06-13T22:08:30.940680"}
+{"task_id": "4ec751eb-2b74-4b68-bda6-f854a1b93d1e", "node": "coder", "state_snapshot": {"current_step": 1}, "timestamp": "2025-06-13T22:08:30.942679"}
+{"task_id": "4ec751eb-2b74-4b68-bda6-f854a1b93d1e", "node": "coder", "state_snapshot": {"current_step": 2}, "timestamp": "2025-06-13T22:08:30.944679"}
+{"task_id": "4ec751eb-2b74-4b68-bda6-f854a1b93d1e", "node": "coder", "state_snapshot": {"current_step": 3}, "timestamp": "2025-06-13T22:08:31.089362"}
+{"task_id": "4ec751eb-2b74-4b68-bda6-f854a1b93d1e", "node": "coder", "state_snapshot": {"current_step": 4}, "timestamp": "2025-06-13T22:08:31.234470"}
+{"task_id": "4ec751eb-2b74-4b68-bda6-f854a1b93d1e", "node": "coder", "state_snapshot": {"current_step": 5}, "timestamp": "2025-06-13T22:08:31.382569"}
+{"task_id": "4ec751eb-2b74-4b68-bda6-f854a1b93d1e", "node": "coder", "state_snapshot": {"current_step": 6}, "timestamp": "2025-06-13T22:08:31.529583"}
+{"task_id": "4ec751eb-2b74-4b68-bda6-f854a1b93d1e", "node": "coder", "state_snapshot": {"current_step": 7}, "timestamp": "2025-06-13T22:08:31.678116"}
+{"task_id": "4ec751eb-2b74-4b68-bda6-f854a1b93d1e", "node": "coder", "state_snapshot": {"current_step": 8}, "timestamp": "2025-06-13T22:08:31.826028"}
+{"task_id": "4ec751eb-2b74-4b68-bda6-f854a1b93d1e", "node": "coder", "state_snapshot": {"error": "Failed on step {'command': 'INSTALL_LIBRARIES', 'path': None, 'content': None, 'libraries': ['markdown2']}: Pip install failed: None"}, "timestamp": "2025-06-13T22:08:31.972948"}
+{"task_id": "4ec751eb-2b74-4b68-bda6-f854a1b93d1e", "node": "debugger", "state_snapshot": {"error": "Ensure that the 'markdown2' library is correctly listed in the project's requirements and is being installed in the environment where the tests are run."}, "timestamp": "2025-06-13T22:08:34.521553"}
+{"task_id": "4ec751eb-2b74-4b68-bda6-f854a1b93d1e", "node": "planner", "state_snapshot": {"current_step": 0, "error": null}, "timestamp": "2025-06-13T22:08:41.979458"}
+{"task_id": "4ec751eb-2b74-4b68-bda6-f854a1b93d1e", "node": "coder", "state_snapshot": {"current_step": 1}, "timestamp": "2025-06-13T22:08:41.981457"}
+{"task_id": "4ec751eb-2b74-4b68-bda6-f854a1b93d1e", "node": "coder", "state_snapshot": {"current_step": 2}, "timestamp": "2025-06-13T22:08:41.982458"}
+{"task_id": "4ec751eb-2b74-4b68-bda6-f854a1b93d1e", "node": "coder", "state_snapshot": {"current_step": 3}, "timestamp": "2025-06-13T22:08:42.129368"}

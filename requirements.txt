@@ -1,6 +1,29 @@
+# requirements.txt
+
+# LangChain ecosystem
+langchain
 langgraph
 langchain-openai
-fastapi
+langchain-community
+langchain-huggingface
+langsmith
+
+# Vector Store & its specific dependencies
+chromadb
+fastapi==0.115.9
+
+# Document Loaders, Embeddings, and Image Processing
+sentence-transformers
+pypdf
+unstructured[local-inference,docx,pdf,md,xml,ocr]
+python-docx
+pytesseract
+Pillow
+
+# Web Server & Client
 uvicorn[standard]
-python-dotenv
 httpx
+
+# Utilities
+python-dotenv
+pydantic

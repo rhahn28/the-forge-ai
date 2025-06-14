@@ -1,0 +1,25 @@
+{"task_id": "d48fa842-8f2a-4abc-9999-5002dd085ff5", "node": "planner", "state_snapshot": {"current_step": 0, "error": null}, "timestamp": "2025-06-13T22:26:26.031175"}
+{"task_id": "d48fa842-8f2a-4abc-9999-5002dd085ff5", "node": "coder", "state_snapshot": {"current_step": 1}, "timestamp": "2025-06-13T22:26:26.034181"}
+{"task_id": "d48fa842-8f2a-4abc-9999-5002dd085ff5", "node": "coder", "state_snapshot": {"current_step": 2}, "timestamp": "2025-06-13T22:26:26.036178"}
+{"task_id": "d48fa842-8f2a-4abc-9999-5002dd085ff5", "node": "coder", "state_snapshot": {"current_step": 3}, "timestamp": "2025-06-13T22:26:33.340407"}
+{"task_id": "d48fa842-8f2a-4abc-9999-5002dd085ff5", "node": "coder", "state_snapshot": {"current_step": 4}, "timestamp": "2025-06-13T22:26:33.492865"}
+{"task_id": "d48fa842-8f2a-4abc-9999-5002dd085ff5", "node": "coder", "state_snapshot": {"current_step": 5}, "timestamp": "2025-06-13T22:26:33.644965"}
+{"task_id": "d48fa842-8f2a-4abc-9999-5002dd085ff5", "node": "coder", "state_snapshot": {"current_step": 6}, "timestamp": "2025-06-13T22:26:33.796289"}
+{"task_id": "d48fa842-8f2a-4abc-9999-5002dd085ff5", "node": "coder", "state_snapshot": {"current_step": 7}, "timestamp": "2025-06-13T22:26:33.952916"}
+{"task_id": "d48fa842-8f2a-4abc-9999-5002dd085ff5", "node": "tester", "state_snapshot": {"error": "'TestEngineerAgent' object has no attribute 'venv_manager'"}, "timestamp": "2025-06-13T22:26:33.954469"}
+{"task_id": "d48fa842-8f2a-4abc-9999-5002dd085ff5", "node": "debugger", "state_snapshot": {"error": "Ensure that the test setup or execution code doesn't mistakenly reference a non-existent 'venv_manager' attribute in 'TestEngineerAgent', potentially originating from misconfigured or extraneous test fixtures or classes."}, "timestamp": "2025-06-13T22:26:35.332670"}
+{"task_id": "d48fa842-8f2a-4abc-9999-5002dd085ff5", "node": "planner", "state_snapshot": {"current_step": 0, "error": null}, "timestamp": "2025-06-13T22:26:45.021378"}
+{"task_id": "d48fa842-8f2a-4abc-9999-5002dd085ff5", "node": "coder", "state_snapshot": {"current_step": 1}, "timestamp": "2025-06-13T22:26:45.023378"}
+{"task_id": "d48fa842-8f2a-4abc-9999-5002dd085ff5", "node": "coder", "state_snapshot": {"current_step": 2}, "timestamp": "2025-06-13T22:26:45.025379"}
+{"task_id": "d48fa842-8f2a-4abc-9999-5002dd085ff5", "node": "coder", "state_snapshot": {"current_step": 3}, "timestamp": "2025-06-13T22:26:45.606753"}
+{"task_id": "d48fa842-8f2a-4abc-9999-5002dd085ff5", "node": "coder", "state_snapshot": {"current_step": 4}, "timestamp": "2025-06-13T22:26:45.750630"}
+{"task_id": "d48fa842-8f2a-4abc-9999-5002dd085ff5", "node": "coder", "state_snapshot": {"current_step": 5}, "timestamp": "2025-06-13T22:26:45.896605"}
+{"task_id": "d48fa842-8f2a-4abc-9999-5002dd085ff5", "node": "coder", "state_snapshot": {"current_step": 6}, "timestamp": "2025-06-13T22:26:46.046810"}
+{"task_id": "d48fa842-8f2a-4abc-9999-5002dd085ff5", "node": "coder", "state_snapshot": {"current_step": 7}, "timestamp": "2025-06-13T22:26:46.193201"}
+{"task_id": "d48fa842-8f2a-4abc-9999-5002dd085ff5", "node": "tester", "state_snapshot": {"error": "'TestEngineerAgent' object has no attribute 'venv_manager'"}, "timestamp": "2025-06-13T22:26:46.195201"}
+{"task_id": "d48fa842-8f2a-4abc-9999-5002dd085ff5", "node": "debugger", "state_snapshot": {"error": "Ensure that the pytest tests are related to verifying the Markdown to HTML conversion logic using the 'markdown2' library, and remove any unrelated test code or attributes such as 'venv_manager' that are causing the AttributeError."}, "timestamp": "2025-06-13T22:26:47.922415"}
+{"task_id": "d48fa842-8f2a-4abc-9999-5002dd085ff5", "node": "planner", "state_snapshot": {"current_step": 0, "error": null}, "timestamp": "2025-06-13T22:26:55.626829"}
+{"task_id": "d48fa842-8f2a-4abc-9999-5002dd085ff5", "node": "coder", "state_snapshot": {"current_step": 1}, "timestamp": "2025-06-13T22:26:55.628633"}
+{"task_id": "d48fa842-8f2a-4abc-9999-5002dd085ff5", "node": "coder", "state_snapshot": {"current_step": 2}, "timestamp": "2025-06-13T22:26:55.763761"}
+{"task_id": "d48fa842-8f2a-4abc-9999-5002dd085ff5", "node": "coder", "state_snapshot": {"current_step": 3}, "timestamp": "2025-06-13T22:26:55.900070"}
+{"task_id": "d48fa842-8f2a-4abc-9999-5002dd085ff5", "node": "coder", "state_snapshot": {"current_step": 4}, "timestamp": "2025-06-13T22:26:55.902077"}

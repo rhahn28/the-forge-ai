@@ -1,32 +1,15 @@
 {
-  "Build_an_automated_deployment_pipeline_that_tests_builds_and_dep_439ef634": {
-    "path": "generated_envs\\Build_an_automated_deployment_pipeline_that_tests_builds_and_dep_439ef634",
-    "created": "2025-06-13T00:01:10.459028",
+  "create_an_app_that_reads_my_gmail_and_draft_responses_using_an_L_b70169f3": {
+    "path": "generated_envs\\create_an_app_that_reads_my_gmail_and_draft_responses_using_an_L_b70169f3",
+    "created": "2025-06-13T23:56:26.426796",
     "libraries": [
-      "nodejs",
-      "npm",
-      "docker"
+      "google-auth",
+      "google-auth-oauthlib",
+      "google-auth-httplib2",
+      "google-api-python-client",
+      "openai",
+      "schedule"
     ],
-    "task_raw_name": "Build an automated deployment pipeline that tests, builds, and deploys applications to cloud servers"
-  },
-  "Create_a_monitoring_dashboard_that_collects_metrics_from_multipl_364ddc53": {
-    "path": "generated_envs\\Create_a_monitoring_dashboard_that_collects_metrics_from_multipl_364ddc53",
-    "created": "2025-06-13T00:03:38.455606",
-    "libraries": [
-      "prometheus_client",
-      "flask",
-      "matplotlib"
-    ],
-    "task_raw_name": "Create a monitoring dashboard that collects metrics from multiple services and displays real-time graphs"
-  },
-  "Create_a_cryptocurrency_trading_bot_that_connects_to_exchange_AP_b889db31": {
-    "path": "generated_envs\\Create_a_cryptocurrency_trading_bot_that_connects_to_exchange_AP_b889db31",
-    "created": "2025-06-13T00:05:10.113077",
-    "libraries": [
-      "ccxt",
-      "pandas",
-      "numpy"
-    ],
-    "task_raw_name": "Create a cryptocurrency trading bot that connects to exchange APIs and executes trades"
+    "task_raw_name": "create an app that reads my gmail and draft responses using an LLM and puts into my drafts. this be done hourly."
   }
 }

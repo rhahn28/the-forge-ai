@@ -1,0 +1,25 @@
+{"task_id": "ce86a5a7-de47-4555-bb76-d404a174d9b7", "node": "planner", "state_snapshot": {"current_step": 0, "error": null}, "timestamp": "2025-06-13T21:50:51.200113"}
+{"task_id": "ce86a5a7-de47-4555-bb76-d404a174d9b7", "node": "coder", "state_snapshot": {"error": "Failed on step {'command': 'INSTALL_LIBRARIES', 'path': None, 'content': None, 'libraries': ['markdown2']}: Pip install failed: None"}, "timestamp": "2025-06-13T21:50:51.350172"}
+{"task_id": "ce86a5a7-de47-4555-bb76-d404a174d9b7", "node": "debugger", "state_snapshot": {"error": "Ensure that the 'markdown2' library is listed in the 'requirements.txt' file and properly installed in the test environment by using `pip install -r requirements.txt` before running the tests."}, "timestamp": "2025-06-13T21:50:52.684961"}
+{"task_id": "ce86a5a7-de47-4555-bb76-d404a174d9b7", "node": "planner", "state_snapshot": {"current_step": 0, "error": null}, "timestamp": "2025-06-13T21:51:09.696699"}
+{"task_id": "ce86a5a7-de47-4555-bb76-d404a174d9b7", "node": "coder", "state_snapshot": {"current_step": 1}, "timestamp": "2025-06-13T21:51:09.699699"}
+{"task_id": "ce86a5a7-de47-4555-bb76-d404a174d9b7", "node": "coder", "state_snapshot": {"current_step": 2}, "timestamp": "2025-06-13T21:51:09.701744"}
+{"task_id": "ce86a5a7-de47-4555-bb76-d404a174d9b7", "node": "coder", "state_snapshot": {"current_step": 3}, "timestamp": "2025-06-13T21:51:09.843568"}
+{"task_id": "ce86a5a7-de47-4555-bb76-d404a174d9b7", "node": "coder", "state_snapshot": {"current_step": 4}, "timestamp": "2025-06-13T21:51:09.980509"}
+{"task_id": "ce86a5a7-de47-4555-bb76-d404a174d9b7", "node": "coder", "state_snapshot": {"current_step": 5}, "timestamp": "2025-06-13T21:51:10.120238"}
+{"task_id": "ce86a5a7-de47-4555-bb76-d404a174d9b7", "node": "coder", "state_snapshot": {"current_step": 6}, "timestamp": "2025-06-13T21:51:10.258716"}
+{"task_id": "ce86a5a7-de47-4555-bb76-d404a174d9b7", "node": "coder", "state_snapshot": {"current_step": 7}, "timestamp": "2025-06-13T21:51:10.397218"}
+{"task_id": "ce86a5a7-de47-4555-bb76-d404a174d9b7", "node": "coder", "state_snapshot": {"current_step": 8}, "timestamp": "2025-06-13T21:51:10.534386"}
+{"task_id": "ce86a5a7-de47-4555-bb76-d404a174d9b7", "node": "coder", "state_snapshot": {"error": "Failed on step {'command': 'INSTALL_LIBRARIES', 'path': None, 'content': None, 'libraries': ['-r requirements.txt']}: Pip install failed: None"}, "timestamp": "2025-06-13T21:51:10.670512"}
+{"task_id": "ce86a5a7-de47-4555-bb76-d404a174d9b7", "node": "debugger", "state_snapshot": {"error": "Ensure that the 'requirements.txt' file is present in the directory from which the installation command is being run and that it correctly lists the 'markdown2' library."}, "timestamp": "2025-06-13T21:51:11.616743"}
+{"task_id": "ce86a5a7-de47-4555-bb76-d404a174d9b7", "node": "planner", "state_snapshot": {"current_step": 0, "error": null}, "timestamp": "2025-06-13T21:51:27.460138"}
+{"task_id": "ce86a5a7-de47-4555-bb76-d404a174d9b7", "node": "coder", "state_snapshot": {"current_step": 1}, "timestamp": "2025-06-13T21:51:27.462198"}
+{"task_id": "ce86a5a7-de47-4555-bb76-d404a174d9b7", "node": "coder", "state_snapshot": {"current_step": 2}, "timestamp": "2025-06-13T21:51:27.613424"}
+{"task_id": "ce86a5a7-de47-4555-bb76-d404a174d9b7", "node": "coder", "state_snapshot": {"current_step": 3}, "timestamp": "2025-06-13T21:51:27.760157"}
+{"task_id": "ce86a5a7-de47-4555-bb76-d404a174d9b7", "node": "coder", "state_snapshot": {"current_step": 4}, "timestamp": "2025-06-13T21:51:27.762173"}
+{"task_id": "ce86a5a7-de47-4555-bb76-d404a174d9b7", "node": "coder", "state_snapshot": {"current_step": 5}, "timestamp": "2025-06-13T21:51:27.900122"}
+{"task_id": "ce86a5a7-de47-4555-bb76-d404a174d9b7", "node": "coder", "state_snapshot": {"current_step": 6}, "timestamp": "2025-06-13T21:51:28.038481"}
+{"task_id": "ce86a5a7-de47-4555-bb76-d404a174d9b7", "node": "coder", "state_snapshot": {"current_step": 7}, "timestamp": "2025-06-13T21:51:28.177789"}
+{"task_id": "ce86a5a7-de47-4555-bb76-d404a174d9b7", "node": "coder", "state_snapshot": {"current_step": 8}, "timestamp": "2025-06-13T21:51:28.317103"}
+{"task_id": "ce86a5a7-de47-4555-bb76-d404a174d9b7", "node": "coder", "state_snapshot": {"error": "Failed on step {'command': 'INSTALL_LIBRARIES', 'path': None, 'content': None, 'libraries': ['markdown2']}: Pip install failed: None"}, "timestamp": "2025-06-13T21:51:28.452353"}
+{"task_id": "ce86a5a7-de47-4555-bb76-d404a174d9b7", "node": "debugger", "state_snapshot": {"error": "Ensure that the 'markdown2' library is correctly listed in the 'requirements.txt' file and installed in the virtual environment before running the tests."}, "timestamp": "2025-06-13T21:51:29.747757"}
