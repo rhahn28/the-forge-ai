@@ -1,0 +1,1 @@
+# Module for scraping the USPTO API for bibliographic information.

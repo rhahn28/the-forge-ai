@@ -1,15 +1,24 @@
 {
-  "create_an_app_that_reads_my_gmail_and_draft_responses_using_an_L_b70169f3": {
-    "path": "generated_envs\\create_an_app_that_reads_my_gmail_and_draft_responses_using_an_L_b70169f3",
-    "created": "2025-06-13T23:56:26.426796",
+  "create_an_app_that_reads_a_list_of_US_patent_applications_from_a_07602416": {
+    "path": "generated_envs\\create_an_app_that_reads_a_list_of_US_patent_applications_from_a_07602416",
+    "created": "2025-06-14T00:29:52.610616",
     "libraries": [
-      "google-auth",
-      "google-auth-oauthlib",
-      "google-auth-httplib2",
-      "google-api-python-client",
       "openai",
-      "schedule"
+      "psycopg2",
+      "Flask",
+      "pandas",
+      "requests"
     ],
-    "task_raw_name": "create an app that reads my gmail and draft responses using an LLM and puts into my drafts. this be done hourly."
+    "task_raw_name": "create an app that reads a list of US patent applications from an excel file and then goes the USPTO API and scrapes all the bibliographic information for each of the application and puts into a postgres database. The app has a front end with a chat feature that allows a user to query the bibliographic data using an LLM to answer quetsions like which application has the longest pendency date"
+  },
+  "create_an_app_that_scrapes_https_patents_google_com_of_patent_da_f893e41c": {
+    "path": "generated_envs\\create_an_app_that_scrapes_https_patents_google_com_of_patent_da_f893e41c",
+    "created": "2025-06-18T15:23:02.402779",
+    "libraries": [
+      "requests",
+      "beautifulsoup4",
+      "psycopg2-binary"
+    ],
+    "task_raw_name": "create an app that scrapes https://patents.google.com of patent data and puts into a postgres database"
   }
 }

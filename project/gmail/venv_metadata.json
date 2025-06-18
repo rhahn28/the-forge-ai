@@ -1,0 +1,15 @@
+{
+  "create_an_app_that_reads_my_gmail_and_draft_responses_using_an_L_b70169f3": {
+    "path": "generated_envs\\create_an_app_that_reads_my_gmail_and_draft_responses_using_an_L_b70169f3",
+    "created": "2025-06-13T23:56:26.426796",
+    "libraries": [
+      "google-auth",
+      "google-auth-oauthlib",
+      "google-auth-httplib2",
+      "google-api-python-client",
+      "openai",
+      "schedule"
+    ],
+    "task_raw_name": "create an app that reads my gmail and draft responses using an LLM and puts into my drafts. this be done hourly."
+  }
+}
