@@ -114,7 +114,7 @@ python --version
 
 ```bash
 # If using git
-git clone <your-repository-url>
+git clone https://github.com/rhahn28/the-forge-ai
 cd the-forge
 
 # Or download and extract the ZIP file
