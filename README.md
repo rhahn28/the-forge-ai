@@ -17,7 +17,7 @@ The Forge is a multi-agent AI system built on Langchain in Python that uses natu
 
 ## 🌟 What Makes The Forge Special?
 
-Unlike chatbots like ChatGPT or Claude that provide single responses, The Forge uses **Agentic AI**— specialized AI agents that collaborate, reason, and execute complex workflows. This is a major advaancement from conversational AI to **action-oriented AI systems**. Most commercially available AI is capable of such tasks, but the owners intentionally block agentic chaining.
+Unlike chatbots like ChatGPT or Claude that provide single responses, The Forge uses **Agentic AI**— specialized AI agents that collaborate, reason, and execute complex workflows. This is a major advaancement from conversational AI to **action-oriented AI systems**. Most commercially available AI is capable of such tasks, but the owners intentionally block agentic chaining. For example, ChatGPT does not natively offer a fully autonomous agentic AI system out-of-the-box like CrewAI, LangGraph, AutoGen, or OpenAgents. Instead, ChatGPT requires structured tools/functions to call based on user input thereby simulating multi-agent behavior, rather than supporting true agentic MCP enabled call. As of this writing, ChatGPT has adopted MCP protocols, but I have not explored this deeply. You can read more about MCP here https://github.com/modelcontextprotocol/modelcontextprotocol.
 
 ### What's the difference between Chatbot vs Agentic AI
 
