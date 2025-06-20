@@ -13,7 +13,7 @@
 ```
 
 
-The Forge is a multi-agent AI system built on Langchain in Python that uses natural language input to generate fully functional software. The project is a personal experiment to see if Langchain and Agentic AI in general has reached a point where anyone can build agents capable of building production quality sofware autonomously. The short answer is yes.
+The Forge is a multi-agent AI system built on Langchain in Python that uses natural language input to generate fully functional software. The project is a personal experiment to see if Langchain and Agentic AI in general has reached a point where anyone can build agents capable of building production quality sofware autonomously. The short answer is yes, it can.
 
 ## 🌟 What Makes The Forge Special?
 
